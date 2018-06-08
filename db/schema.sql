@@ -12,8 +12,8 @@ USE burgers_db;
 
 CREATE TABLE burgers (
     id INT NOT NULL AUTO_INCREMENT,
-    burger_name VARCHAR(30) NULL,
-    devoured BOOLEAN NOT NULL default 0,
+    name VARCHAR(30) NULL,
+    devoured BOOLEAN default 0,
     PRIMARY KEY (id)
 
 );
