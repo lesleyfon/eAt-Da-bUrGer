@@ -6,7 +6,7 @@
   {{#each burgers}}
   {{!-- unless sleepy is true execute the partial --}}
     {{#unless devoured}}
-      {{> /burger-block devoured=true}}
+      {{> burger/burger-block yum=true}}
     {{/unless}}
   {{/each}}
 </ul>
@@ -17,7 +17,7 @@
   {{#each burgers}}
   {{!-- if sleepy if false execute the partial --}}
   {{!-- partial is a snippet we can  use multiple times --}}
-    {{#if sleepy}}
+    {{#if devoured}}
       {{> burger/burger-block sleep=false}}
     {{/if}}
   {{/each}}
