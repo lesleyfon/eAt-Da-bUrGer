@@ -1,39 +1,44 @@
 // Make sure we wait to attach our handlers until the DOM is fully loaded.
 $(function() {
   $(".change-sleep").on("click", function(event) {
+    event.preventDefault();
     var id = $(this).data("id");
-    var newSleep = $(this).data("newsleep");
-
-    var newSleepState = {
-      sleepy: newSleep
+    // var newSleep = $(this).data("newsleep");
+    var newSleep = true;
+    console.log("newSleep: ", newSleep)
+    var burgerUpdate = {
+      devoured: newSleep
     };
 
     // Send the PUT request.
-    $.ajax("/api/burger/" + id, {
+    // $.put("/api/burgers/" + id, burgerUpdate, function(data){
+    //   console.log(data)
+    //   location.reload();
+    // })
+    $.ajax("/api/burgers/" + id, {
       type: "PUT",
-      data: newSleepState
+      data: burgerUpdate
     }).then(
-      function() {
-        console.log("changed burger to", newSleep);
+      function(data) {
+        console.log("changed burger to", data);
         // Reload the page to get the updated list
         location.reload();
-      }
-    );
+      });
   });
 
-  $(".create-form").on("submit", function(event) {
+  $("#create_button").on("click", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
-    var newCat = {
-      name: $("#ca").val().trim(),
-      sleepy: $("[name=sleepy]:checked").val().trim()
+    var newBurger = {
+      name: $("#burger_name").val(),
+      devoured: 0
     };
-
+    console.log("newBurger", newBurger)
     // Send the POST request.
-    $.ajax("/api/burger", {
+    $.ajax("/api/burgers", {
       type: "POST",
-      data: newCat
+      data: newBurger
     }).then(
       function() {
         console.log("created new cat");
@@ -46,7 +51,7 @@ $(function() {
     $(".delete-burger").on("click", function(event) {
     var id = $(this).data("id");
     console.log(id);
-    $.ajax("/api/burger/" + id, {
+    $.ajax("/api/burgers/" + id, {
       type: "DELETE" 
     }).then(
     function(){

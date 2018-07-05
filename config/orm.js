@@ -24,11 +24,12 @@ function printQuestionMarks(num) {
 }
 
 // Helper function to convert object key/value pairs to SQL syntax
-function oblToSql(ob) {
+function objToSql(ob) {
     var arr = [];
     // loop through the keys and push the key/value as a string int arr
     for (var key in ob) {
         var value = ob[key];
+        console.log("inside objToSql", value)
         // check to skip hidden properties
         if (Object.hasOwnProperty.call(ob, key)) {
             // if string with spaces, add quotations (Lana Del Grey => 'Lana Del Grey')  
@@ -76,12 +77,12 @@ var orm = {
 
     update: function (table, objColVals, condition, cb) {
         var quertString = "UPDATE " + table;
-        quertString += " SET";
+        quertString += " SET ";
         quertString += objToSql(objColVals);
         quertString += " WHERE " ;
         quertString += condition;
 
-        console.log(quertString);
+        console.log("This is the query string:", quertString);
         connection.query(quertString, function(err, result){
             if (err){
                 throw err

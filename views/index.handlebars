@@ -3,8 +3,10 @@
 <h2>Burger devoured</h2>
 
 <ul>
+  {{!-- burgerscontroller.js --}}
   {{#each burgers}}
   {{!-- unless sleepy is true execute the partial --}}
+  {{!-- unless devoured  we run the code from lines 10-12 --}}
     {{#unless devoured}}
       {{> burger/burger-block yum=true}}
     {{/unless}}
@@ -18,7 +20,8 @@
   {{!-- if sleepy if false execute the partial --}}
   {{!-- partial is a snippet we can  use multiple times --}}
     {{#if devoured}}
-      {{> burger/burger-block sleep=false}}
+      {{!-- {{> burger/burger-block sleep=false}} --}}
+     <p>{{this.id}} . {{this.name}}</p>
     {{/if}}
   {{/each}}
 </ul>
@@ -27,16 +30,16 @@
 <form class="create-form">
 
   <div class="form-group">
-    <label for="ca">Burger Name:</label>
-    <input type="text" id="bur" name="name">
+    <label for="burger_name">Burger Name:</label>
+    <input type="text" id="burger_name" name="burger_name">
   </div>
 
-  <div class="form-group">
+  {{!-- <div class="form-group">
     <label for="slee">Sleepy?</label><br>
     <input type="radio" name="sleepy" value="1" checked> Sleepy!<br>
     <input type="radio" name="sleepy" value="0"> Awake
-  </div>
+  </div> --}}
 
-  <button type="submit">Add </button>
-  <button type="submit">Delete</button>
+  <button type="submit" id="create_button">Add </button>
+  {{!-- <button type="submit">Delete</button> --}}
 </form>
